@@ -5,7 +5,6 @@ import com.yash.Fitness.Tracker.Repository.StepsRepository;
 import com.yash.Fitness.Tracker.entity.StepsEntity;
 import com.yash.Fitness.Tracker.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 @Service
