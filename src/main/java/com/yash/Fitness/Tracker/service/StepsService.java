@@ -7,6 +7,8 @@ import com.yash.Fitness.Tracker.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StepsService
 {
@@ -28,6 +30,12 @@ public class StepsService
         user.getStepsEntity().add(saved);
         userService.updateUser(user);
 
+    }
+
+    public List<StepsEntity> getAllEntries(String userName)
+    {
+        UserEntity user = userService.findByUserName(userName);
+        return user.getStepsEntity();
     }
 
 
