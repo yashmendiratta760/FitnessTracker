@@ -48,7 +48,7 @@ public class UserController {
         return new ResponseEntity<>("OK",HttpStatus.OK);
     }
     @PostMapping("/generate-otp")
-    public ResponseEntity<?> generateOtp(@RequestBody UserDTO user) {
+    public ResponseEntity<String> generateOtp(@RequestBody UserDTO user) {
 
         try {
             if (userService.existsByUserName(user.getUserName())) {
@@ -82,12 +82,14 @@ public class UserController {
                 userService.createUser(userData.getUserDTO());
                 otpCache.removeData(otpValidate.getEmail());
                 log.info("otp validated");
-                return new ResponseEntity<>(HttpStatus.OK);
+                String token = jwtUtils.generateToken(userData.getUserDTO().getUserName());
+                return ResponseEntity.ok(new JwtResponse(token));
             }
             else {
                 log.info("otp not validated");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         } catch (Exception e) {
             log.error("error in signup",e.toString());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
