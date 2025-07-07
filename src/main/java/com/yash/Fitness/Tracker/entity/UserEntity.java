@@ -31,6 +31,8 @@ public class UserEntity
     @NonNull
     private String email;
 
+    private String imageUrl;
+
     @DBRef
     private List<StepsEntity> stepsEntity = new ArrayList<>();
 }

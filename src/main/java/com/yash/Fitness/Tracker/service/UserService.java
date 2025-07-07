@@ -6,6 +6,7 @@ import com.yash.Fitness.Tracker.Repository.UserRepository;
 import com.yash.Fitness.Tracker.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -23,6 +24,7 @@ public class UserService
         userE.setEmail(user.getEmail());
         userRepository.save(userE);
     }
+
 
     public void updateUser(UserEntity user) {
         userRepository.save(user);

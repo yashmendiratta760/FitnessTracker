@@ -8,6 +8,11 @@ spring:
   application:
     name: Fitness-Tracker
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
   data:
     mongodb:
       uri: ${MONGODB_URI}
@@ -26,3 +31,7 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
 
+cloudinary:
+  cloud_name: ${CLOUD_NAME}
+  api_key: ${CLOUD_API_KEY}
+  api_secret: ${CLOUD_API_SECRET}
