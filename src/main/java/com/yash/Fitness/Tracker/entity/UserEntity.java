@@ -31,7 +31,7 @@ public class UserEntity
     @NonNull
     private String email;
 
-    private String imageUrl;
+    private String imageUrl = "https://res.cloudinary.com/dgvkjcaqg/image/upload/v1740300887/samples/ecommerce/shoes.png";
 
     @DBRef
     private List<StepsEntity> stepsEntity = new ArrayList<>();

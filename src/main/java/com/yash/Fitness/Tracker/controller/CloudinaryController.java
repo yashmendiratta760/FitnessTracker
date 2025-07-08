@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -53,6 +52,21 @@ public class CloudinaryController
             response.put("imageUrl", imageUrl);
             return ResponseEntity.ok(response);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("getImage")
+    public ResponseEntity<?> getImageUrl()
+    {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String userName = authentication.getName();
+
+            UserEntity user = userService.findByUserName(userName);
+            if(user==null) return new ResponseEntity<>("User not=t Found",HttpStatus.OK);
+            return ResponseEntity.ok(user.getImageUrl());
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
