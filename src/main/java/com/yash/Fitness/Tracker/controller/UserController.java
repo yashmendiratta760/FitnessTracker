@@ -3,6 +3,7 @@ package com.yash.Fitness.Tracker.controller;
 
 import com.yash.Fitness.Tracker.DTO.*;
 import com.yash.Fitness.Tracker.cache.OtpCache;
+import com.yash.Fitness.Tracker.entity.UserEntity;
 import com.yash.Fitness.Tracker.service.UserService;
 import com.yash.Fitness.Tracker.utils.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -104,6 +105,7 @@ public class UserController {
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
+
             // Generate JWT token if authentication is successful
             String token = jwtUtils.generateToken(authentication.getName());
             return ResponseEntity.ok(new JwtResponse(token));
@@ -113,4 +115,15 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
+
+    @PostMapping("/getEmail")
+    public ResponseEntity<String> getEmail(@RequestBody LoginDTO loginDTO)
+    {
+        UserEntity user = userService.findByUserName(loginDTO.getUserName());
+
+        String email = user.getEmail();
+
+        return ResponseEntity.ok(email);
+    }
+
 }
