@@ -32,7 +32,8 @@ public class SpringSecurity
                 .authorizeHttpRequests(authz-> authz
 //                        .requestMatchers("/users/login").authenticated()
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/users/**",
+                                "/auth/google").permitAll()
                         .anyRequest().authenticated());
         http.sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

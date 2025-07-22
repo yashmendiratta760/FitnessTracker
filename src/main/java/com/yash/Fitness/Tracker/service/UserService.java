@@ -38,5 +38,14 @@ public class UserService
     {
         return userRepository.findByUserName(userName);
     }
+
+    public boolean existsByEmail(String Email) {
+        return userRepository.existsByEmail(Email);
+    }
+
+    public UserEntity findByEmail(String Email)
+    {
+        return userRepository.findByEmail(Email);
+    }
 }
 
